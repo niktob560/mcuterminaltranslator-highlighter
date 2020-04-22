@@ -44,3 +44,22 @@ BGMAGENTA='\033[45m'    #  ${BGMAGENTA}
 BGCYAN='\033[46m'       #  ${BGCYAN}
 BGGRAY='\033[47m'       #  ${BGGRAY}
 BGDEF='\033[49m'        #  ${BGDEF}
+
+while read line; do
+    iter=0
+    for i in $line; do
+        case $iter in
+            0)
+                echo -e $INVERSE''$LMAGENTA"$i"$NORMAL | tr -d '\n'
+            ;;
+            1|2)
+                echo -e $INVERSE''$LCYAN"$i"$NORMAL | tr -d '\n'
+            ;;
+            *)
+                echo $i | tr -d '\n'
+            ;;
+        esac
+        iter=$(( $iter + 1 ))
+    done
+done < "${1:-/dev/stdin}"
+echo ""
