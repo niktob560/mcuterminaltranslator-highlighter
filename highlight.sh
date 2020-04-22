@@ -47,28 +47,13 @@ BGDEF='\033[49m'        #  ${BGDEF}
 
 multidevice=$1
 
-while read line; do
-    iter=0
-    for i in $line; do
-        case $iter in
-            0)
-                echo -e $INVERSE''$LMAGENTA" $i "$NORMAL | tr -d '\n'
-            ;;
-            1|2)
-                echo -e $INVERSE''$LCYAN" $i "$NORMAL | tr -d '\n'
-            ;;
-            3)
-                if [[ "$multidevice" == "1" ]]; then
-                    echo -e $INVERSE''$LYELLOW" $i "$NORMAL | tr -d '\n'
-                else
-                    echo " "$i" " | tr -d '\n'
-                fi
-            ;;
-            *)
-                echo " "$i" " | tr -d '\n'
-            ;;
-        esac;
-        iter=$(( $iter + 1 ))
+if [[ ! -z $multidevice ]]; then
+    while read line; do
+        echo "$line" | tr -s ' ' | awk -v f=5 '{printf "\033[7m""\033[1;35m " $1 " \033[1;36m " $2 "  " $3 " \033[1;32m " $4 " \033[0m"; for(i=f;i<NF;i++) printf " "$i" "; print " "$NF}'
     done
-done
+else
+    while read line; do
+        echo "$line" | tr -s ' ' | awk -v f=4 '{printf "\033[7m""\033[1;35m " $1 " \033[1;36m " $2 "  " $3 " \033[0m"; for(i=f;i<NF;i++) printf " "$i" "; print " "$NF}'
+    done
+fi
 echo ""
