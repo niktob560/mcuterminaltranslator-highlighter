@@ -45,6 +45,8 @@ BGCYAN='\033[46m'       #  ${BGCYAN}
 BGGRAY='\033[47m'       #  ${BGGRAY}
 BGDEF='\033[49m'        #  ${BGDEF}
 
+multidevice=$1
+
 while read line; do
     iter=0
     for i in $line; do
@@ -55,11 +57,18 @@ while read line; do
             1|2)
                 echo -e $INVERSE''$LCYAN" $i "$NORMAL | tr -d '\n'
             ;;
+            3)
+                if [[ "$multidevice" == "1" ]]; then
+                    echo -e $INVERSE''$LYELLOW" $i "$NORMAL | tr -d '\n'
+                else
+                    echo " "$i" " | tr -d '\n'
+                fi
+            ;;
             *)
                 echo " "$i" " | tr -d '\n'
             ;;
-        esac
+        esac;
         iter=$(( $iter + 1 ))
     done
-done < "${1:-/dev/stdin}"
+done
 echo ""
