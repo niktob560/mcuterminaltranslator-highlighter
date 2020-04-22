@@ -50,10 +50,10 @@ while read line; do
     for i in $line; do
         case $iter in
             0)
-                echo -e $INVERSE''$LMAGENTA"$i"$NORMAL | tr -d '\n'
+                echo -e $INVERSE''$LMAGENTA" $i "$NORMAL | tr -d '\n'
             ;;
             1|2)
-                echo -e $INVERSE''$LCYAN"$i"$NORMAL | tr -d '\n'
+                echo -e $INVERSE''$LCYAN" $i "$NORMAL | tr -d '\n'
             ;;
             *)
                 echo $i | tr -d '\n'
