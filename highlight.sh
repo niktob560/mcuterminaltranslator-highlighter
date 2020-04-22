@@ -56,7 +56,7 @@ while read line; do
                 echo -e $INVERSE''$LCYAN" $i "$NORMAL | tr -d '\n'
             ;;
             *)
-                echo $i | tr -d '\n'
+                echo " "$i" " | tr -d '\n'
             ;;
         esac
         iter=$(( $iter + 1 ))
